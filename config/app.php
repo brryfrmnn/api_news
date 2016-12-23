@@ -178,9 +178,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Caffeinated\Modules\ModulesServiceProvider::class,
-        Centaur\CentaurServiceProvider::class, 
+        Centaur\CentaurServiceProvider::class,
         Barryvdh\Cors\ServiceProvider::class,
         Laravel\Scout\ScoutServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
     ],
 
     /*
@@ -229,6 +230,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Module' => Caffeinated\Modules\Facades\Module::class,
+        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

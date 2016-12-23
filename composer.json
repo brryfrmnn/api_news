@@ -11,7 +11,9 @@
         "srlabs/centaur": "^3.0",
         "spatie/laravel-sluggable": "^1.3",
         "barryvdh/laravel-cors": "^0.8.2",
-        "laravel/scout": "^2.0"
+        "laravel/scout": "^2.0",
+        "algolia/algoliasearch-client-php": "^1.13",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
