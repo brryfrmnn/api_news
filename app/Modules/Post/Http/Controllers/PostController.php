@@ -35,7 +35,26 @@ class PostController extends Controller
 
             $post = Post::with('category','writer','editor','admin')->filter($filter);
             if ($q!=null) {
-                $post->search($q,$result_type);
+                if ($result_type == "title") {
+                    $post = Post::search($q)->where('status',1)->paginate()->appends($request->input());
+                    // $post = $post->paginate($offset)->appends($request->input());
+                    $meta['status'] = true;
+                    $meta['message'] = "List All Post";
+                    $meta['total'] = $post->total();
+                    $meta['offset'] = $post->perPage();
+                    $meta['current'] =$post->currentpage();
+                    $meta['last']=$post->lastPage();
+                    $meta['next']=$post->nextPageUrl();
+                    $meta['prev']=$post->previousPageUrl();
+                    $meta['from'] = $post->firstItem();
+                    $meta['to'] = $post->lastItem();
+                    $data = $post->all();
+                    $meta['code'] = 200;
+                    $code = 200;
+                    return response()->json(compact('meta','data'),$code);
+                } else {
+                    $post->searchQuery($q,$result_type);
+                }
             }
             if ($category != null) {
                 $post->byCategory($category);

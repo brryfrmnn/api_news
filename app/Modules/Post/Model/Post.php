@@ -12,6 +12,7 @@ use Laravel\Scout\Searchable;
 class Post extends Model
 {
     
+    use Searchable;
     protected $table = 'posts';
     use SoftDeletes;
     use HasSlug;
@@ -55,7 +56,7 @@ class Post extends Model
 
     //=============scope query==============
 
-    public function scopeSearch($query, $q, $result_type)
+    public function scopeSearchQuery($query, $q, $result_type)
     {
         if ($q != null) {
             if ($result_type == 'slug') {
