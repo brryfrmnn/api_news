@@ -113,8 +113,8 @@ class PostController extends Controller
                 'title' => 'required|string',
                 'category_id' => 'integer',
                 'image' => 'string',
-                'article' => 'required|string|min:3',
-                'writer_id' => 'required|integer',
+                'article' => 'string',
+                'writer_id' => 'integer',
                 'admin_id' => 'integer',
                 'editor_id' => 'integer',
                 'type'  => 'string'
