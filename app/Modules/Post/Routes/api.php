@@ -15,13 +15,13 @@ use Illuminate\Http\Request;
 Route::group(['prefix'=>'post', 'middleware' => 'cors'], function($api){
 	Route::get('/', 'PostController@index');
     Route::post('/', 'PostController@store');
-    Route::delete('/', 'PostController@destroy');
     Route::get('/show', 'PostController@show');
     Route::patch('/', 'PostController@update');
     Route::patch('/status', 'PostController@updateStatus');
     Route::post('/featured', 'PostController@setFeatured');
     Route::post('/featured/unset', 'PostController@unsetFeatured');
     Route::get('/featured', 'PostController@getFeatured');
+    Route::delete('/{id}', 'PostController@destroy');
 });
 Route::group(['prefix' => 'comment', 'middleware' => 'cors'], function () {
     Route::get('/', 'CommentController@index');

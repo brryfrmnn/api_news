@@ -9,13 +9,13 @@ use Spatie\Sluggable\SlugOptions;
 
 class Category extends Model
 {
-    
+
     protected $table = 'categories';
     use SoftDeletes;
     use HasSlug;
-    protected $hidden = ['admin_id','deleted_at','parent_id','slug'];
+    protected $hidden = ['admin_id','deleted_at','parent_id'];
     // protected $appends = ['full_name'];
-    
+
     /**
      * Get the options for generating the slug.
      */

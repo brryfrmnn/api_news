@@ -180,6 +180,7 @@ return [
         Caffeinated\Modules\ModulesServiceProvider::class,
         Centaur\CentaurServiceProvider::class, 
         Barryvdh\Cors\ServiceProvider::class,
+        Laravel\Scout\ScoutServiceProvider::class,
     ],
 
     /*

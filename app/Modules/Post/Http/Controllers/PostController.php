@@ -114,7 +114,6 @@ class PostController extends Controller
             try 
             {
                 //upload image to storage
-                
                 if ($image!= null && $type == 'image') {
                     $extension  = $image->getClientOriginalExtension();
                     $fileName      = str_replace(' ', '_', $title).uniqid();
@@ -408,50 +407,26 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy($id)
     {
-        $validator = \Validator::make($request->all(), [
-                'id' => 'required|integer',
-                'admin_id' => 'integer',
-                'writer_id' => 'integer'
-        ]);
-        if ($validator->passes()) {
-            $id       = $request->id;
-            $admin_id = $request->admin_id;
-            $writer_id= $request->writer_id;
-
-            try 
-            {
-                $post = Post::findOrFail($id);
-                if ($writer_id == $post->writer_id) {
-                    if ($post->delete()) {
-                        $meta['status'] = true;
-                        $meta['message'] = "Success deleting post"; 
-                    }
-                } else {
-                    $meta['status'] = true;
-                    $meta['message'] = "access denied";
-                }
-            } 
-            catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) 
-            {
-                $meta['status'] = false;
-                $meta['message'] = 'Error '.$e;
+        try 
+        {
+            $post = Post::findOrFail($id);
+            if ($post->delete()) {
+                $meta['status'] = true;
+                $meta['message'] = "Success deleting post"; 
             }
-            catch (\Illuminate\Database\QueryException $e) {
-                $meta['status'] = false;
-                $meta['message'] = 'Error '.$e;
-            }
-            
-        }
-        else
+        } 
+        catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) 
         {
             $meta['status'] = false;
-            $meta['message'] = "Failed delete post";
-            $meta['error'] = $validator->errors();
-            $data = null;
+            $meta['message'] = 'Error '.$e;
         }
-        
+        catch (\Illuminate\Database\QueryException $e) {
+            $meta['status'] = false;
+            $meta['message'] = 'Error '.$e;
+        }
+                    
         $meta['code'] = 200;
         $code = 200;
         return response()->json(compact('meta','data'),$code);
