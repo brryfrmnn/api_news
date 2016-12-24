@@ -326,9 +326,21 @@ class PostController extends Controller
                 $mergeFileName = $fileName.'.'.$extension;
                 $destination   = storage_path('app/public/');
                 if ($image != null) {
-                    $image = \Storage::put(
+                    $image = \Image::make($image);
+                    if ($image->mime() == 'image/jpeg')
+                        $extension = '.jpg';
+                    elseif ($image->mime() == 'image/png')
+                        $extension = '.png';
+                    elseif ($image->mime() == 'image/gif')
+                        $extension = '.gif';
+                    // $extension  = $image->getClientOriginalExtension();
+                    $fileName      = str_replace(' ', '_', $title).uniqid();
+                    $mergeFileName = $fileName.'.'.$extension;
+                    $destination   = storage_path('app/public/');
+
+                    $image_save = \Storage::put(
                         'public/'.$mergeFileName,
-                        file_get_contents($request->file('image')->getRealPath())
+                        $image->stream()
                     );
                     //resize image
                     $resize = \Image::make(asset('storage/'.$mergeFileName));

@@ -53,7 +53,7 @@ return [
 
     'users' => [
 
-        'model' => 'Cartalyst\Sentinel\Users\EloquentUser',
+        'model' => 'App\Modules\User\Model\User',
 
     ],
 
