@@ -192,6 +192,7 @@ class PostController extends Controller
                 $post->type         = $type;
                 $post->writer_id    = $writer_id;
                 if ($post->save()) {
+                    $post->searchable();
                     $meta['status'] = true;
                     $meta['message'] = "Success creating post";
                     $data = $post;
