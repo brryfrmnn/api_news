@@ -31,7 +31,7 @@ class PostController extends Controller
             $offset         = $request->input('offset',10);
             $category       = $request->category;
             $filter         = $request->filter;
-            $sort           = $request->sort;
+            $sort           = $request->input('sort','latest');
 
             $post = Post::with('category','writer','editor','admin')->filter($filter);
             if ($q!=null) {

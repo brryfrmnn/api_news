@@ -108,7 +108,7 @@ class Post extends Model
         if ($sort == 'latest') {
             $data = $query->orderBy('id','desc');
         } else if ($sort == 'oldest') {
-
+            $data = $query->orderBy('id','asc');
         }
     }
 
